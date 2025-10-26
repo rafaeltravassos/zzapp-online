@@ -129,28 +129,31 @@
         }
 	],
 	"routes": [
-        {
-            "pattern": "codes.zzapp.online",
-            "custom_domain": true
-        },
-        {
-            "pattern": "*build-preview.cloudflare.dev/*",
-            "custom_domain": false,
-            "zone_id": "db01fac4261b2604aacad8410443a3e2"
-        }
-    ],
-	"vars": {
-        "TEMPLATES_REPOSITORY": "https://github.com/cloudflare/vibesdk-templates",
-        "ALLOWED_EMAIL": "rafael.travassos.2007@gmail.com",
-        "DISPATCH_NAMESPACE": "zzapp-online-default-namespace",
-        "ENABLE_READ_REPLICAS": "true",
-        "CLOUDFLARE_AI_GATEWAY": "zzapp-online-gateway",
-        "CUSTOM_DOMAIN": "codes.zzapp.online",
-        "MAX_SANDBOX_INSTANCES": "10",
-        "SANDBOX_INSTANCE_TYPE": "standard-4",
-        "USE_CLOUDFLARE_IMAGES": false,
+    {
+      "pattern": "codes.zzapp.online",
+      "custom_domain": true
     },
-	"workers_dev": false,
-	"preview_urls": false
-}
-Atualiza rota principal para codes.zzapp.online
+    {
+      "pattern": "*build-preview.cloudflare.dev/*",
+      "custom_domain": false,
+      "zone_id": "db01fac4261b2604aacad8410443a3e2"
+    }
+  ], // <-- VÍRGULA ADICIONADA AQUI
+
+  "vars": {
+    "TEMPLATES_REPOSITORY": "https://github.com/cloudflare/vibesdk-templates",
+    "ALLOWED_EMAIL": "rafael.travassos.2007@gmail.com",
+    "DISPATCH_NAMESPACE": "zzapp-online-default-namespace",
+    "ENABLE_READ_REPLICAS": "true",
+    "CLOUDFLARE_AI_GATEWAY": "zzapp-online-gateway",
+    "CUSTOM_DOMAIN": "codes.zzapp.online",
+    "MAX_SANDBOX_INSTANCES": "10",
+    "SANDBOX_INSTANCE_TYPE": "standard-4",
+    "USE_CLOUDFLARE_IMAGES": false // <-- VÍRGULA REMOVIDA DAQUI
+  }, // <-- VÍRGULA ADICIONADA AQUI
+
+  "workers_dev": false, // <-- VÍRGULA ADICIONADA AQUI
+  "preview_urls": false
+  // Certifique-se de que esta é a última linha antes da chave '}' final do arquivo,
+  // ou adicione uma vírgula se houver mais configurações depois dela.
+} // <-- Chave final que fecha todo o arquivo wrangler.jsonc
