@@ -1,7 +1,7 @@
 /**
- * For more details on how to configure Wrangler, refer to:
- * https://developers.cloudflare.com/workers/wrangler/configuration/
- */
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "zzapp-online",
@@ -90,7 +90,18 @@
 		"bindings": [
 			{
 				"class_name": "CodeGeneratorAgent",
-				"name": "CodeGenObject"
+				"name": "CodeGenObject",
+				"unsafe": {
+					"bindings": [
+						{ "name": "AI", "type": "ai" },
+						{ "name": "DB", "type": "d1" },
+						{ "name": "TEMPLATES_BUCKET", "type": "r2" },
+						{ "name": "VibecoderStore", "type": "kv" },
+						{ "name": "Sandbox", "type": "durable_object" },
+						{ "name": "DISPATCHER", "type": "dispatch_namespace" },
+						{ "name": "API_RATE_LIMITER", "type": "ratelimit" }
+					]
+				}
 			},
 			{
 				"class_name": "UserAppSandboxService",
@@ -119,7 +130,7 @@
 		}
 	],
 	// "placement": {
-	//   "mode": "smart"
+	//  _"mode": "smart"
 	// },
 	"migrations": [
 		{
