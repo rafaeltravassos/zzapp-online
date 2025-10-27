@@ -64,8 +64,8 @@
 	"containers": [
 		{
 			"class_name": "UserAppSandboxService",
-			// "image": "./SandboxDockerfile",
-			"image": "registry.cloudflare.com/vibesdk-production-userappsandboxservice:cfe197fc",
+			"image": "./SandboxDockerfile", // <<-- ALTERAÇÃO FEITA AQUI
+			// "image": "registry.cloudflare.com/vibesdk-production-userappsandboxservice:cfe197fc", // <<-- E AQUI
 			// Altering max_instances value will have no effect. Please use the MAX_SANDBOX_INSTANCES var instead.
 			"max_instances": 2900,
 			// ATTENTION: Altering instance_type value will have no effect. Please use the SANDBOX_INSTANCE_TYPE var instead.
@@ -170,18 +170,4 @@
 		}
 	],
 	"vars": {
-		"TEMPLATES_REPOSITORY": "https://github.com/cloudflare/vibesdk-templates",
-		"ALLOWED_EMAIL": "rafael.travassos.2007@gmail.com",
-		"DISPATCH_NAMESPACE": "zzapp-online-default-namespace",
-		"ENABLE_READ_REPLICAS": "true",
-		"CLOUDFLARE_AI_GATEWAY": "zzapp-online-gateway",
-		"CUSTOM_DOMAIN": "codes.zzapp.online",
-		"MAX_SANDBOX_INSTANCES": "10",
-		"SANDBOX_INSTANCE_TYPE": "standard-4",
-		"DEFAULT_GENERATION_MODEL": "@cf/google/gemini-1.5-flash-latest",
-		"USE_CLOUDFLARE_IMAGES": false
-	},
-	"workers_dev": false,
-	"preview_urls": false
-}
-
+		"TEMPLATES_REPOSITORY": "https
