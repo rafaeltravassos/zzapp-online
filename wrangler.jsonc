@@ -115,7 +115,7 @@
 						{ "name": "DISPATCHER", "type": "dispatch_namespace" },
 						{ "name": "API_RATE_LIMITER", "type": "ratelimit" },
 						{ "name": "AUTH_RATE_LIMITER", "type": "ratelimit" },
-						{ "name": "DORateLimitStore", "type": "durable_object" }
+						{ "name": "DORate_LIMIT_STORE", "type": "durable_object" }
 					]
 				}
 			},
@@ -178,6 +178,7 @@
 		"CUSTOM_DOMAIN": "codes.zzapp.online",
 		"MAX_SANDBOX_INSTANCES": "10",
 		"SANDBOX_INSTANCE_TYPE": "standard-4",
+		"DEFAULT_GENERATION_MODEL": "@cf/google/gemini-1.5-flash-latest",
 		"USE_CLOUDFLARE_IMAGES": false
 	},
 	"workers_dev": false,
