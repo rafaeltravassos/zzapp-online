@@ -106,7 +106,17 @@
 			{
 				"class_name": "UserAppSandboxService",
 				"containers": true,
-				"name": "Sandbox"
+				"name": "Sandbox",
+				"unsafe": {
+					"bindings": [
+						{ "name": "DB", "type": "d1" },
+						{ "name": "TEMPLATES_BUCKET", "type": "r2" },
+						{ "name": "VibecoderStore", "type": "kv" },
+						{ "name": "DISPATCHER", "type": "dispatch_namespace" },
+						{ "name": "API_RATE_LIMITER", "type": "ratelimit" },
+						{ "name": "AUTH_RATE_LIMITER", "type": "ratelimit" }
+					]
+				}
 			},
 			{
 				"class_name": "DORateLimitStore",
@@ -130,7 +140,7 @@
 		}
 	],
 	// "placement": {
-	//  _"mode": "smart"
+	//section
 	// },
 	"migrations": [
 		{
@@ -172,3 +182,4 @@
 	"workers_dev": false,
 	"preview_urls": false
 }
+
