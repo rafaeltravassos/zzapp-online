@@ -114,7 +114,8 @@
 						{ "name": "VibecoderStore", "type": "kv" },
 						{ "name": "DISPATCHER", "type": "dispatch_namespace" },
 						{ "name": "API_RATE_LIMITER", "type": "ratelimit" },
-						{ "name": "AUTH_RATE_LIMITER", "type": "ratelimit" }
+						{ "name": "AUTH_RATE_LIMITER", "type": "ratelimit" },
+						{ "name": "DORateLimitStore", "type": "durable_object" }
 					]
 				}
 			},
