@@ -1,43 +1,49 @@
 /**
- * For more details on how to configure Wrangler, refer to:
- * https://developers.cloudflare.com/workers/wrangler/configuration/
- */
- {
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "zzapp-online",
 	"main": "worker/index.ts",
 	"compatibility_date": "2025-08-10",
 	"compatibility_flags": ["nodejs_compat"],
-    "version_metadata": {
-        "binding": "CF_VERSION_METADATA"
-    },
+	"version_metadata": {
+		"binding": "CF_VERSION_METADATA"
+	},
 	"assets": {
 		"directory": "dist",
 		"not_found_handling": "single-page-application",
 		// "run_worker_first": ["!/src/*", "!/api/docs/*"],
-        "run_worker_first": true,
-        "binding": "ASSETS"
+		"run_worker_first": true,
+		"binding": "ASSETS"
 	},
 	"observability": {
 		"enabled": true,
-        "head_sampling_rate": 1,
+		"head_sampling_rate": 1
 	},
-    "unsafe": {
-        "bindings": [
-            {
-                "name": "API_RATE_LIMITER",
-                "type": "ratelimit",
-                "namespace_id": "2101",
-                "simple": { "limit": 10000, "period": 60 }
-            },
-            {
-                "name": "AUTH_RATE_LIMITER",
-                "type": "ratelimit",
-                "namespace_id": "2102",
-                "simple": { "limit": 1000, "period": 60 }
-            }
-        ]
-    },
+	"unsafe": {
+		"bindings": [
+			{
+				"name": "API_RATE_LIMITER",
+				"type": "ratelimit",
+				"namespace_id": "2101",
+				"simple": {
+					"limit": 10000,
+					"period": 60
+				}
+			},
+			{
+				"name": "AUTH_RATE_LIMITER",
+				"type": "ratelimit",
+				"namespace_id": "2102",
+				"simple": {
+					"limit": 1000,
+					"period": 60
+				}
+			}
+		]
+	},
 	/**
 	 * Bindings
 	 * Bindings allow your Worker to interact with resources on the Cloudflare Developer Platform, including
@@ -46,29 +52,29 @@
 	 */
 	"ai": {
 		"binding": "AI",
-        "remote": true
+		"remote": true
 	},
-    "dispatch_namespaces": [
-        {
-            "binding": "DISPATCHER",
-            "namespace": "vibesdk-default-namespace",
-            "remote": true
-        }
-    ],
+	"dispatch_namespaces": [
+		{
+			"binding": "DISPATCHER",
+			"namespace": "vibesdk-default-namespace",
+			"remote": true
+		}
+	],
 	"containers": [
 		{
 			"class_name": "UserAppSandboxService",
 			"image": "./SandboxDockerfile",
-            // "image": "registry.cloudflare.com/vibesdk-production-userappsandboxservice:cfe197fc",
-            // Altering max_instances value will have no effect. Please use the MAX_SANDBOX_INSTANCES var instead.
+			// "image": "registry.cloudflare.com/vibesdk-production-userappsandboxservice:cfe197fc",
+			// Altering max_instances value will have no effect. Please use the MAX_SANDBOX_INSTANCES var instead.
 			"max_instances": 2900,
-            // ATTENTION: Altering instance_type value will have no effect. Please use the SANDBOX_INSTANCE_TYPE var instead.
-            "instance_type": {
-                "vcpu": 4,
-                "memory_mib": 4096,
-                "disk_mb": 6144
-            },
-            "rollout_step_percentage": 100
+			// ATTENTION: Altering instance_type value will have no effect. Please use the SANDBOX_INSTANCE_TYPE var instead.
+			"instance_type": {
+				"vcpu": 4,
+				"memory_mib": 4096,
+				"disk_mb": 6144
+			},
+			"rollout_step_percentage": 100
 		}
 	],
 	"d1_databases": [
@@ -86,33 +92,35 @@
 				"class_name": "CodeGeneratorAgent",
 				"name": "CodeGenObject"
 			},
-            {
-                "class_name": "UserAppSandboxService",
-                "name": "Sandbox"
-            },
-            {
-                "class_name": "DORateLimitStore",
-                "name": "DORateLimitStore"
-            }
+			{
+				"class_name": "UserAppSandboxService",
+				"containers": true,
+				"name": "Sandbox"
+			},
+			{
+				"class_name": "DORateLimitStore",
+				"name": "DORateLimitStore"
+			}
 		]
 	},
-    "r2_buckets": [
-      {
-        "binding": "TEMPLATES_BUCKET",
-        "bucket_name": "zzapp-codes-templates",
-        "remote": true,"preview_bucket_name": "zzapp-codes-templates"
-      }
-    ],
-    "kv_namespaces": [
-        {
-            "binding": "VibecoderStore",
-            "id": "b46ccb357cf4450e935353f4905711ef",
-            "remote": true
-        }
-    ],
-    // "placement": {
-    //   "mode": "smart"
-    // },
+	"r2_buckets": [
+		{
+			"binding": "TEMPLATES_BUCKET",
+			"bucket_name": "zzapp-codes-templates",
+			"remote": true,
+			"preview_bucket_name": "zzapp-codes-templates"
+		}
+	],
+	"kv_namespaces": [
+		{
+			"binding": "VibecoderStore",
+			"id": "b46ccb357cf4450e935353f4905711ef",
+			"remote": true
+		}
+	],
+	// "placement": {
+	//   "mode": "smart"
+	// },
 	"migrations": [
 		{
 			"new_sqlite_classes": [
@@ -121,39 +129,35 @@
 			],
 			"tag": "v1"
 		},
-        {
-            "new_sqlite_classes": [
-                "DORateLimitStore"
-            ],
-            "tag": "v2"
-        }
+		{
+			"new_sqlite_classes": [
+				"DORateLimitStore"
+			],
+			"tag": "v2"
+		}
 	],
 	"routes": [
-    {
-      "pattern": "codes.zzapp.online",
-      "custom_domain": true
-    },
-    {
-      "pattern": "*build-preview.cloudflare.dev/*",
-      "custom_domain": false,
-      "zone_id": "db01fac4261b2604aacad8410443a3e2"
-    }
-  ], // <-- VÍRGULA ADICIONADA AQUI
-
-  "vars": {
-    "TEMPLATES_REPOSITORY": "https://github.com/cloudflare/vibesdk-templates",
-    "ALLOWED_EMAIL": "rafael.travassos.2007@gmail.com",
-    "DISPATCH_NAMESPACE": "zzapp-online-default-namespace",
-    "ENABLE_READ_REPLICAS": "true",
-    "CLOUDFLARE_AI_GATEWAY": "zzapp-online-gateway",
-    "CUSTOM_DOMAIN": "codes.zzapp.online",
-    "MAX_SANDBOX_INSTANCES": "10",
-    "SANDBOX_INSTANCE_TYPE": "standard-4",
-    "USE_CLOUDFLARE_IMAGES": false // <-- VÍRGULA REMOVIDA DAQUI
-  }, // <-- VÍRGULA ADICIONADA AQUI
-
-  "workers_dev": false, // <-- VÍRGULA ADICIONADA AQUI
-  "preview_urls": false
-  // Certifique-se de que esta é a última linha antes da chave '}' final do arquivo,
-  // ou adicione uma vírgula se houver mais configurações depois dela.
-} // <-- Chave final que fecha todo o arquivo wrangler.jsonc
+		{
+			"pattern": "codes.zzapp.online",
+			"custom_domain": true
+		},
+		{
+			"pattern": "*build-preview.cloudflare.dev/*",
+			"custom_domain": false,
+			"zone_id": "db01fac4261b2604aacad8410443a3e2"
+		}
+	],
+	"vars": {
+		"TEMPLATES_REPOSITORY": "https://github.com/cloudflare/vibesdk-templates",
+		"ALLOWED_EMAIL": "rafael.travassos.2007@gmail.com",
+		"DISPATCH_NAMESPACE": "zzapp-online-default-namespace",
+		"ENABLE_READ_REPLICAS": "true",
+		"CLOUDFLARE_AI_GATEWAY": "zzapp-online-gateway",
+		"CUSTOM_DOMAIN": "codes.zzapp.online",
+		"MAX_SANDBOX_INSTANCES": "10",
+		"SANDBOX_INSTANCE_TYPE": "standard-4",
+		"USE_CLOUDFLARE_IMAGES": false
+	},
+	"workers_dev": false,
+	"preview_urls": false
+}
