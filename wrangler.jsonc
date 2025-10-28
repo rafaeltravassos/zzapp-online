@@ -57,15 +57,15 @@
 	"dispatch_namespaces": [
 		{
 			"binding": "DISPATCHER",
-			"namespace": "vibesdk-default-namespace",
+			"namespace": "vibesdk-default-namespace", // Note: This might need changing later if using a different namespace name
 			"remote": true
 		}
 	],
 	"containers": [
 		{
 			"class_name": "UserAppSandboxService",
-			"image": "./SandboxDockerfile", // <<-- ALTERAÇÃO FEITA AQUI
-			// "image": "registry.cloudflare.com/vibesdk-production-userappsandboxservice:cfe197fc", // <<-- E AQUI
+			"image": "./SandboxDockerfile", // Corrected line
+			// "image": "registry.cloudflare.com/vibesdk-production-userappsandboxservice:cfe197fc", // Commented out incorrect line
 			// Altering max_instances value will have no effect. Please use the MAX_SANDBOX_INSTANCES var instead.
 			"max_instances": 2900,
 			// ATTENTION: Altering instance_type value will have no effect. Please use the SANDBOX_INSTANCE_TYPE var instead.
@@ -155,19 +155,4 @@
 			"new_sqlite_classes": [
 				"DORateLimitStore"
 			],
-			"tag": "v2"
-		}
-	],
-	"routes": [
-		{
-			"pattern": "codes.zzapp.online",
-			"custom_domain": true
-		},
-		{
-			"pattern": "*build-preview.cloudflare.dev/*",
-			"custom_domain": false,
-			"zone_id": "db01fac4261b2604aacad8410443a3e2"
-		}
-	],
-	"vars": {
-		"TEMPLATES_REPOSITORY": "https
+			"tag": "
