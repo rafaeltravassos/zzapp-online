@@ -52,5 +52,5 @@ WORKDIR /app
 
 EXPOSE 3000
 
-# Run the same command as the original image
-CMD ["bun", "index.ts"]
+# Run the development server using the 'dev' script from package.json
+CMD ["bun", "run", "dev"] # <-- CORREÇÃO APLICADA AQUI
