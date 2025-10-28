@@ -155,4 +155,32 @@
 			"new_sqlite_classes": [
 				"DORateLimitStore"
 			],
-			"tag": "
+			"tag": "v2"
+		}
+	], // <<-- FECHAMENTO CORRETO DO ARRAY migrations
+	"routes": [
+		{
+			"pattern": "codes.zzapp.online",
+			"custom_domain": true
+		},
+		{
+			"pattern": "*build-preview.cloudflare.dev/*", // Note: This might need changing based on actual preview domain setup
+			"custom_domain": false,
+			"zone_id": "db01fac4261b2604aacad8410443a3e2" // Note: Ensure this zone_id is correct for the preview pattern
+		}
+	],
+	"vars": {
+		"TEMPLATES_REPOSITORY": "https://github.com/cloudflare/vibesdk-templates",
+		"ALLOWED_EMAIL": "rafael.travassos.2007@gmail.com",
+		"DISPATCH_NAMESPACE": "zzapp-online-default-namespace", // Note: Make sure this namespace exists or was created by the deploy script
+		"ENABLE_READ_REPLICAS": "true",
+		"CLOUDFLARE_AI_GATEWAY": "zzapp-online-gateway", // Note: Make sure this gateway exists or was created
+		"CUSTOM_DOMAIN": "codes.zzapp.online",
+		"MAX_SANDBOX_INSTANCES": "10",
+		"SANDBOX_INSTANCE_TYPE": "standard-4",
+		"DEFAULT_GENERATION_MODEL": "@cf/google/gemini-1.5-flash-latest",
+		"USE_CLOUDFLARE_IMAGES": false
+	},
+	"workers_dev": false,
+	"preview_urls": false
+} // <<-- FECHAMENTO CORRETO DO OBJETO PRINCIPAL
