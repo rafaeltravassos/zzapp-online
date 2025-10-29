@@ -4,8 +4,8 @@ import { AuthButton } from '../auth/auth-button';
 import { ThemeToggle } from '../theme-toggle';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/contexts/auth-context';
-import { ChevronRight, GithubIcon, AlertCircle } from 'lucide-react';
-import { CloudflareLogo } from '../icons/logos';
+import { ChevronRight, AlertCircle } from 'lucide-react';
+// A CloudflareLogo e GithubIcon foram removidas por não serem mais usadas
 import { usePlatformStatus } from '@/hooks/use-platform-status';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -52,9 +52,9 @@ export function GlobalHeader() {
 								className='flex items-center'
 							>
 								<SidebarTrigger className="h-8 w-8 text-text-primary rounded-md hover:bg-orange-50/40 transition-colors duration-200" />
-								{/* INÍCIO DA MARCA PERSONALIZADA */}
+								{/* MARCA PERSONALIZADA - ATUALIZADA */}
 								<span className="ml-3 text-xl font-bold text-text-primary whitespace-nowrap">
-									VIBE CODES BR
+									ZZapp Online
 								</span>
 								{/* FIM DA MARCA PERSONALIZADA */}
 
@@ -77,7 +77,6 @@ export function GlobalHeader() {
 						)}
 
 
-
 						{/* Right section */}
 						<motion.div
 							initial={{ opacity: 0, x: 10 }}
@@ -85,28 +84,8 @@ export function GlobalHeader() {
 							transition={{ delay: 0.2 }}
 							className="flex flex-wrap items-center justify-end gap-3 justify-self-end"
 						>
-							<div className="gap-6 flex flex-col justify-between border px-3 bg-bg-4 dark:bg-bg-2 rounded-md py-1.5 border-accent/50 dark:border-accent/50 !border-t-transparent rounded-t-none ml-2 md:ml-6 -mt-2">
-								<div className="flex w-full gap-2 items-center">
-									{/* TEXTO DE CHAMADA PARA AÇÃO PERSONALIZADO */}
-									<div className='text-text-primary/80 mr-4 text-lg font-medium'>Crie e Implante seu Próprio Vibe Code Platform</div>
-									{/* FIM TEXTO DE CHAMADA PARA AÇÃO PERSONALIZADO */}
-									
-									<div className="flex font-semibold gap-2 items-center bg-accent dark:bg-accent text-white rounded px-2 hover:opacity-80 cursor-pointer" onClick={() => window.open("https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/vibesdk", "_blank")}>
-										Deploy <CloudflareLogo className='w-5 h-5' color1='#fff' />
-									</div>
-									<div className="flex font-semibold items-center bg-text-primary text-bg-4 rounded gap-1 px-2 hover:opacity-80 cursor-pointer" onClick={() => window.open("https://github.com/cloudflare/vibesdk", "_blank")} >
-										Fork <GithubIcon className="size-4" />
-									</div>
-								</div>
-							</div>
-							{/* Disable cost display for now */}
-							{/* {user && (
-							<CostDisplay
-								{...extractUserAnalyticsProps(analytics)}
-								loading={analyticsLoading}
-								variant="inline"
-							/>
-						)} */}
+							{/* BLOCO DE CALL-TO-ACTION REMOVIDO COMPLETAMENTE */}
+							
 							<ThemeToggle />
 							<AuthButton />
 						</motion.div>
