@@ -52,14 +52,12 @@ export function GlobalHeader() {
 								className='flex items-center'
 							>
 								<SidebarTrigger className="h-8 w-8 text-text-primary rounded-md hover:bg-orange-50/40 transition-colors duration-200" />
-								<CloudflareLogo
-									className="flex-shrink-0 mx-auto transition-all duration-300"
-									style={{
-										width: '28px',
-										height: '28px',
-										marginLeft: '8px',
-									}}
-								/>
+								{/* INÍCIO DA MARCA PERSONALIZADA */}
+								<span className="ml-3 text-xl font-bold text-text-primary whitespace-nowrap">
+									VIBE CODES BR
+								</span>
+								{/* FIM DA MARCA PERSONALIZADA */}
+
 								{hasMaintenanceMessage && (
 									<button
 										type="button"
@@ -89,7 +87,10 @@ export function GlobalHeader() {
 						>
 							<div className="gap-6 flex flex-col justify-between border px-3 bg-bg-4 dark:bg-bg-2 rounded-md py-1.5 border-accent/50 dark:border-accent/50 !border-t-transparent rounded-t-none ml-2 md:ml-6 -mt-2">
 								<div className="flex w-full gap-2 items-center">
-									<div className='text-text-primary/80 mr-4 text-lg font-medium'>Deploy your own vibe-coding platform</div>
+									{/* TEXTO DE CHAMADA PARA AÇÃO PERSONALIZADO */}
+									<div className='text-text-primary/80 mr-4 text-lg font-medium'>Crie e Implante seu Próprio Vibe Code Platform</div>
+									{/* FIM TEXTO DE CHAMADA PARA AÇÃO PERSONALIZADO */}
+									
 									<div className="flex font-semibold gap-2 items-center bg-accent dark:bg-accent text-white rounded px-2 hover:opacity-80 cursor-pointer" onClick={() => window.open("https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/vibesdk", "_blank")}>
 										Deploy <CloudflareLogo className='w-5 h-5' color1='#fff' />
 									</div>
