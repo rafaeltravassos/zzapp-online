@@ -9,6 +9,7 @@ import {
 	Lock,
 	Users2,
 	Bookmark,
+	// LayoutGrid,
 	Compass,
 } from 'lucide-react';
 import './sidebar-overrides.css';
@@ -84,7 +85,7 @@ function AppMenuItem({
 			// Usando uma tradução simplificada para a distância de tempo
 			return formatDistanceToNow(app.updatedAt, { addSuffix: true, locale: { formatDistance: () => 'tempo atrás' } as any });
 		}
-		return 'Recentemente';
+		return 'Recentemente'; /* <- TRADUÇÃO: Recently */
 	};
 
 	return (
@@ -238,7 +239,7 @@ export function AppSidebar() {
 													<Plus className="h-4 w-4 text-neutral-50" />
 													{!isCollapsed && (
 														<span className="font-medium text-neutral-50">
-															Novo Projeto /* TRADUÇÃO: New build */
+															Novo Projeto {/* TRADUÇÃO: New build */}
 														</span>
 													)}
 												</button>
@@ -382,7 +383,7 @@ export function AppSidebar() {
 								)}
 							</SidebarGroup>
 
-							{/* Favorites */}
+							/* Favorites */
 							{favoriteApps.length > 0 && (
 								<>
 									<SidebarSeparator />
