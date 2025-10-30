@@ -40,7 +40,7 @@ import {
 	TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { formatDistanceToNow, isValid } from 'date-fns';
-import { AppActionsDropdown } from '@/components/shared/AppActionsDropdown';
+import { AppActionsDropdown } => '@/components/shared/AppActionsDropdown';
 
 interface App {
 	id: string;
@@ -239,7 +239,7 @@ export function AppSidebar() {
 													<Plus className="h-4 w-4 text-neutral-50" />
 													{!isCollapsed && (
 														<span className="font-medium text-neutral-50">
-															Novo Projeto 
+															Novo Projeto {/* TRADUÇÃO: New build */}
 														</span>
 													)}
 												</button>
@@ -263,7 +263,7 @@ export function AppSidebar() {
 										<div className="relative bg-bg-3 mb-4 mt-2">
 											<Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-text-tertiary" />
 											<Input
-												placeholder="Buscar projetos..." 
+												placeholder="Buscar projetos..." /* TRADUÇÃO: Search apps... */
 												value={searchQuery}
 												onChange={(e) =>
 													setSearchQuery(
@@ -281,7 +281,7 @@ export function AppSidebar() {
 														<SidebarMenuItem>
 															<div className="flex items-center justify-center py-4">
 																<div className="text-sm text-text-tertiary">
-																	Buscando... 
+																	Buscando... /* TRADUÇÃO: Searching... */
 																</div>
 															</div>
 														</SidebarMenuItem>
@@ -328,7 +328,7 @@ export function AppSidebar() {
 														<SidebarMenuItem>
 															<div className="flex items-center justify-center py-4">
 																<div className="text-sm text-text-tertiary">
-																	Nenhum projeto encontrado para "{searchQuery}" 
+																	Nenhum projeto encontrado para "{searchQuery}" /* TRADUÇÃO: No apps found for "..." */
 																</div>
 															</div>
 														</SidebarMenuItem>
@@ -364,13 +364,13 @@ export function AppSidebar() {
 																		'/apps',
 																	)
 																}
-																tooltip="Ver todos os projetos" 
+																tooltip="Ver todos os projetos" /* TRADUÇÃO: View all apps */
 																className="text-text-tertiary hover:text-text-primary view-all-button"
 															>
 																<ChevronRight className="h-4 w-4" />
 																{!isCollapsed && (
 																	<span className="font-medium text-text-primary/80">
-																		Ver todos os projetos → 
+																		Ver todos os projetos → /* TRADUÇÃO: View all apps -> */
 																	</span>
 																)}
 															</SidebarMenuButton>
@@ -395,7 +395,7 @@ export function AppSidebar() {
 													'justify-center px-0',
 											)}
 										>
-											{!isCollapsed && 'Favoritos'} 
+											{!isCollapsed && 'Favoritos'} /* TRADUÇÃO: Bookmarked */
 											<Bookmark className="h-5 w-5 fill-yellow-500 text-yellow-500" />
 											
 										</SidebarGroupLabel>
@@ -453,7 +453,7 @@ export function AppSidebar() {
 															side="right"
 															className="ml-2"
 														>
-															Meus Quadros 
+															Meus Quadros /* TRADUÇÃO: My Boards */
 														</TooltipContent>
 													</Tooltip>
 												</TooltipProvider>
@@ -461,7 +461,7 @@ export function AppSidebar() {
 												<>
 													<div className="flex items-center gap-2">
 														<Users className="h-4 w-4" />
-														<span>Meus Quadros</span> 
+														<span>Meus Quadros</span> /* TRADUÇÃO: My Boards */
 													</div>
 													<ChevronRight
 														className={cn(
@@ -514,12 +514,12 @@ export function AppSidebar() {
 																			{
 																				board.memberCount
 																			}{' '}
-																			membros 
+																			membros /* TRADUÇÃO: members */
 																			•{' '}
 																			{
 																				board.appCount
 																			}{' '}
-																			projetos 
+																			projetos /* TRADUÇÃO: apps */
 																		</p>
 																	</div>
 																)}
@@ -533,13 +533,13 @@ export function AppSidebar() {
 																	'/boards',
 																)
 															}
-															tooltip="Ver todos os quadros" 
+															tooltip="Ver todos os quadros" /* TRADUÇÃO: Browse all boards */
 															className="text-text-tertiary hover:text-text-primary view-all-button"
 														>
 															<Plus className="h-4 w-4" />
 															{!isCollapsed && (
 																<span className="font-medium text-text-primary/80 ml-2">
-																	Ver todos os quadros 
+																	Ver todos os quadros /* TRADUÇÃO: Browse all boards */
 																</span>
 															)}
 														</SidebarMenuButton>
@@ -551,42 +551,6 @@ export function AppSidebar() {
 								</>
 							)}
 						</ScrollArea>
-					)}
-				</SidebarContent>
-
-				<SidebarFooter>
-					{user && (
-						<SidebarMenu>
-							<SidebarMenuItem>
-								<SidebarMenuButton
-									id="discover-link"
-									onClick={() => navigate('/discover')}
-									tooltip="Descobrir" 
-									className="group hover:opacity-80 hover:cursor-pointer hover:bg-bg-1/50 transition-all duration-200"
-								>
-									<Compass className="h-6 w-6 text-text-primary/60 group-hover:text-primary/80 transition-colors" />
-									{!isCollapsed && (
-										<span className="text-text-primary/80 font-medium group-hover:text-primary transition-colors">
-											Descobrir
-										</span>
-									)}
-								</SidebarMenuButton>
-							</SidebarMenuItem>
-							<SidebarMenuItem>
-								<SidebarMenuButton
-									onClick={() => navigate('/settings')}
-									tooltip="Configurações" 
-									className="group hover:opacity-80 hover:cursor-pointer hover:bg-bg-1/50 transition-all duration-200"
-								>
-									<Settings className="h-6 w-6 text-text-primary/60 group-hover:text-primary/80 transition-colors" />
-									{!isCollapsed && (
-										<span className="font-medium text-text-primary/80 group-hover:text-primary transition-colors">
-											Configurações
-										</span>
-									)}
-								</SidebarMenuButton>
-							</SidebarMenuItem>
-						</SidebarMenu>
 					)}
 				</SidebarFooter>
 			</Sidebar>
