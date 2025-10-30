@@ -85,7 +85,7 @@ function AppMenuItem({
 			// Usando uma tradução simplificada para a distância de tempo
 			return formatDistanceToNow(app.updatedAt, { addSuffix: true, locale: { formatDistance: () => 'tempo atrás' } as any });
 		}
-		return 'Recentemente'; /* <- TRADUÇÃO: Recently */
+		return 'Recentemente'; /* TRADUÇÃO: Recently */
 	};
 
 	return (
