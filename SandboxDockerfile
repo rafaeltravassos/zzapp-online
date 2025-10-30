@@ -2,13 +2,18 @@
 FROM docker.io/cloudflare/sandbox:0.1.3
 # FROM --platform=linux/arm64 docker.io/cloudflare/sandbox:0.1.3
 
-# Instala pacotes do sistema (Etapa 1/2 do RUN longo)
+# --- ETAPA CRÍTICA DE INSTALAÇÃO (Dividida em 3 para evitar Timeout) ---
 ARG TARGETARCH
-RUN apt-get update && \
-    apt-get install -y git ca-certificates curl procps net-tools && \
-    update-ca-certificates
 
-# Baixa cloudflared, configura git, e limpa cache (Etapa 2/2 do RUN longo)
+# 1. RUN: Apenas Update (Cria a primeira camada de cache)
+RUN apt-get update
+
+# 2. RUN: Apenas Instalação de Pacotes (Cria a segunda camada de cache)
+RUN apt-get install -y git ca-certificates curl procps net-tools && \
+    update-ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+
+# 3. RUN: Baixa cloudflared e configura git
 RUN case ${TARGETARCH} in \
         "amd64") ARCH="amd64" ;; \
         "arm64") ARCH="arm64" ;; \
@@ -17,9 +22,9 @@ RUN case ${TARGETARCH} in \
     curl -L -k --output cloudflared "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-${ARCH}" && \
     chmod +x cloudflared && \
     mv cloudflared /usr/local/bin/ && \
-    rm -rf /var/lib/apt/lists/* && \    
     git config --global user.email "vibesdk-bot@cloudflare.com" && \
     git config --global user.name "Cloudflare Vibesdk bot"
+# --- FIM DA OTIMIZAÇÃO CRÍTICA ---
 
 # Create directory for error monitoring system
 RUN mkdir -p /app/container /app/data
