@@ -239,7 +239,7 @@ export function AppSidebar() {
 													<Plus className="h-4 w-4 text-neutral-50" />
 													{!isCollapsed && (
 														<span className="font-medium text-neutral-50">
-															Novo Projeto /* <- TRADUÇÃO: New build */
+															Novo Projeto {/* <- TRADUÇÃO: New build */}
 														</span>
 													)}
 												</button>
