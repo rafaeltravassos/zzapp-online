@@ -9,6 +9,7 @@ import {
 	Lock,
 	Users2,
 	Bookmark,
+	// LayoutGrid,
 	Compass,
 } from 'lucide-react';
 import './sidebar-overrides.css';
@@ -30,7 +31,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useAuth } from '@/contexts/auth-context';
-import { useNavigate } => 'react-router';
+import { useNavigate } from 'react-router';
 import { cn } from '@/lib/utils';
 import {
 	Tooltip,
@@ -81,10 +82,9 @@ function AppMenuItem({
 	const formatTimestamp = () => {
 		if (app.updatedAtFormatted) return app.updatedAtFormatted;
 		if (app.updatedAt && isValid(app.updatedAt)) {
-			// Usando uma tradução simplificada para a distância de tempo
-			return formatDistanceToNow(app.updatedAt, { addSuffix: true, locale: { formatDistance: () => 'tempo atrás' } as any });
+			return formatDistanceToNow(app.updatedAt, { addSuffix: true });
 		}
-		return 'Recentemente';
+		return 'Recently';
 	};
 
 	return (
@@ -109,7 +109,7 @@ function AppMenuItem({
 							)}
 
 							<div className="relative flex-1 min-w-0 overflow-hidden">
-								<span className="font-medium flex justify-start items-center gap-2 text-text-primary/80 whitespace-nowrap">
+								<span className="font-medium flex justify-start  items-center  gap-2 text-text-primary/80 whitespace-nowrap">
 									<span className="text-ellipsis w-fit overflow-hidden">
 										{app.title}{' '}
 									</span>
@@ -238,7 +238,7 @@ export function AppSidebar() {
 													<Plus className="h-4 w-4 text-neutral-50" />
 													{!isCollapsed && (
 														<span className="font-medium text-neutral-50">
-															Novo Projeto
+															New build
 														</span>
 													)}
 												</button>
@@ -262,7 +262,7 @@ export function AppSidebar() {
 										<div className="relative bg-bg-3 mb-4 mt-2">
 											<Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-text-tertiary" />
 											<Input
-												placeholder="Buscar projetos..."
+												placeholder="Search apps..."
 												value={searchQuery}
 												onChange={(e) =>
 													setSearchQuery(
@@ -280,17 +280,24 @@ export function AppSidebar() {
 														<SidebarMenuItem>
 															<div className="flex items-center justify-center py-4">
 																<div className="text-sm text-text-tertiary">
-																	Buscando...
+																	Searching...
 																</div>
 															</div>
 														</SidebarMenuItem>
 													) : searchResults.length >
-													  0 ? (
+													  0 ? (
 														<>
 															<SidebarMenuItem>
 																<div className="px-2 py-1 text-xs text-text-tertiary">
-																	{/* Tradução complexa para 'Found X apps' */}
-																	{searchResults.length} {searchResults.length !== 1 ? 'projetos' : 'projeto'} encontrado(s)
+																	Found{' '}
+																	{
+																		searchResults.length
+																	}{' '}
+																	app
+																	{searchResults.length !==
+																	1
+																		? 's'
+																		: ''}
 																</div>
 															</SidebarMenuItem>
 															{searchResults.map(
@@ -327,7 +334,12 @@ export function AppSidebar() {
 														<SidebarMenuItem>
 															<div className="flex items-center justify-center py-4">
 																<div className="text-sm text-text-tertiary">
-																	Nenhum projeto encontrado para "{searchQuery}" 
+																	No apps
+																	found for "
+																	{
+																		searchQuery
+																	}
+																	"
 																</div>
 															</div>
 														</SidebarMenuItem>
@@ -363,13 +375,14 @@ export function AppSidebar() {
 																		'/apps',
 																	)
 																}
-																tooltip="Ver todos os projetos" 
+																tooltip="View all apps"
 																className="text-text-tertiary hover:text-text-primary view-all-button"
 															>
 																<ChevronRight className="h-4 w-4" />
 																{!isCollapsed && (
 																	<span className="font-medium text-text-primary/80">
-																		Ver todos os projetos → 
+																		View all
+																		apps →
 																	</span>
 																)}
 															</SidebarMenuButton>
@@ -394,7 +407,7 @@ export function AppSidebar() {
 													'justify-center px-0',
 											)}
 										>
-											{!isCollapsed && 'Favoritos'} 
+											{!isCollapsed && 'Bookmarked'}
 											<Bookmark className="h-5 w-5 fill-yellow-500 text-yellow-500" />
 											
 										</SidebarGroupLabel>
@@ -424,7 +437,7 @@ export function AppSidebar() {
 								</>
 							)}
 
-							/* Boards */
+							{/* Boards */}
 							{boards.length > 0 && (
 								<>
 									<SidebarSeparator />
@@ -452,7 +465,7 @@ export function AppSidebar() {
 															side="right"
 															className="ml-2"
 														>
-															Meus Quadros 
+															My Boards
 														</TooltipContent>
 													</Tooltip>
 												</TooltipProvider>
@@ -460,7 +473,7 @@ export function AppSidebar() {
 												<>
 													<div className="flex items-center gap-2">
 														<Users className="h-4 w-4" />
-														<span>Meus Quadros</span> 
+														<span>My Boards</span>
 													</div>
 													<ChevronRight
 														className={cn(
@@ -513,12 +526,12 @@ export function AppSidebar() {
 																			{
 																				board.memberCount
 																			}{' '}
-																			membros 
+																			members
 																			•{' '}
 																			{
 																				board.appCount
 																			}{' '}
-																			projetos 
+																			apps
 																		</p>
 																	</div>
 																)}
@@ -532,13 +545,14 @@ export function AppSidebar() {
 																	'/boards',
 																)
 															}
-															tooltip="Ver todos os quadros" 
+															tooltip="Browse all boards"
 															className="text-text-tertiary hover:text-text-primary view-all-button"
 														>
 															<Plus className="h-4 w-4" />
 															{!isCollapsed && (
 																<span className="font-medium text-text-primary/80 ml-2">
-																	Ver todos os quadros 
+																	Browse all
+																	boards
 																</span>
 															)}
 														</SidebarMenuButton>
@@ -560,13 +574,13 @@ export function AppSidebar() {
 								<SidebarMenuButton
 									id="discover-link"
 									onClick={() => navigate('/discover')}
-									tooltip="Descobrir" 
+									tooltip="Discover"
 									className="group hover:opacity-80 hover:cursor-pointer hover:bg-bg-1/50 transition-all duration-200"
 								>
 									<Compass className="h-6 w-6 text-text-primary/60 group-hover:text-primary/80 transition-colors" />
 									{!isCollapsed && (
 										<span className="text-text-primary/80 font-medium group-hover:text-primary transition-colors">
-											Descobrir
+											Discover
 										</span>
 									)}
 								</SidebarMenuButton>
@@ -574,13 +588,13 @@ export function AppSidebar() {
 							<SidebarMenuItem>
 								<SidebarMenuButton
 									onClick={() => navigate('/settings')}
-									tooltip="Configurações" 
+									tooltip="Settings"
 									className="group hover:opacity-80 hover:cursor-pointer hover:bg-bg-1/50 transition-all duration-200"
 								>
 									<Settings className="h-6 w-6 text-text-primary/60 group-hover:text-primary/80 transition-colors" />
 									{!isCollapsed && (
 										<span className="font-medium text-text-primary/80 group-hover:text-primary transition-colors">
-											Configurações
+											Settings
 										</span>
 									)}
 								</SidebarMenuButton>
